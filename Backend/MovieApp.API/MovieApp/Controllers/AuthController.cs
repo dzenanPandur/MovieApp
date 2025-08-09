@@ -6,6 +6,8 @@ using MovieApp.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -53,7 +55,8 @@ public class AuthController : ControllerBase
             return Ok(new { message = "User registered successfully" });
         }
 
-        return BadRequest(result.Errors);
+        var errors = string.Join("; ", result.Errors.Select(e => e.Description));
+        return BadRequest(errors);
     }
 
     [HttpGet("login-google")]
@@ -81,47 +84,72 @@ public class AuthController : ControllerBase
             return BadRequest("Error loading external login information");
         }
 
+        // Try to sign in with external login provider
+        var signInResult = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, false);
 
-        var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, false);
-
-        if (result.Succeeded)
+        if (signInResult.Succeeded)
         {
             var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
             var token = GenerateJwtToken(user);
 
-            var frontendUrl = returnUrl ?? "http://localhost:4200";
+            var frontendUrl = returnUrl ?? _configuration["Frontend:Url"];
             return Redirect($"{frontendUrl}#token={token}");
         }
 
-
+        // Get email and name from external provider
         var email = info.Principal.FindFirstValue(ClaimTypes.Email);
         var name = info.Principal.FindFirstValue(ClaimTypes.Name);
 
-        if (email != null)
+        if (string.IsNullOrEmpty(email))
         {
-            var newUser = new ApplicationUser
-            {
-                UserName = email,
-                Email = email,
-                EmailConfirmed = true
-            };
-
-            var createResult = await _userManager.CreateAsync(newUser);
-            if (createResult.Succeeded)
-            {
-                await _userManager.AddLoginAsync(newUser, info);
-                var token = GenerateJwtToken(newUser);
-
-                var frontendUrl = !string.IsNullOrEmpty(returnUrl) ? returnUrl : "http://localhost:4200";
-                return Redirect($"{frontendUrl}#token={token}");
-            }
-
-            return BadRequest(createResult.Errors);
+            // Email is required to create a user
+            return BadRequest("Email claim not received from external provider.");
         }
 
-        return BadRequest("Unable to create user from external login");
-    }
+        // Check if a user with this email already exists
+        var existingUserByEmail = await _userManager.FindByEmailAsync(email);
+        if (existingUserByEmail != null)
+        {
+            // Link external login if not linked yet
+            var addLoginResult = await _userManager.AddLoginAsync(existingUserByEmail, info);
+            if (!addLoginResult.Succeeded)
+            {
+                var errors = string.Join("; ", addLoginResult.Errors.Select(e => e.Description));
+                return BadRequest($"Failed to link external login: {errors}");
+            }
 
+            var token = GenerateJwtToken(existingUserByEmail);
+            var frontendUrl = !string.IsNullOrEmpty(returnUrl) ? returnUrl : "http://localhost:4200";
+            return Redirect($"{frontendUrl}#token={token}");
+        }
+
+        // Create new user if email not registered yet
+        var newUser = new ApplicationUser
+        {
+            UserName = email,
+            Email = email,
+            EmailConfirmed = true
+        };
+
+        var createResult = await _userManager.CreateAsync(newUser);
+        if (!createResult.Succeeded)
+        {
+            var errors = string.Join("; ", createResult.Errors.Select(e => e.Description));
+            return BadRequest($"User creation failed: {errors}");
+        }
+
+        // Link the external login provider
+        var loginResult = await _userManager.AddLoginAsync(newUser, info);
+        if (!loginResult.Succeeded)
+        {
+            var errors = string.Join("; ", loginResult.Errors.Select(e => e.Description));
+            return BadRequest($"Failed to link external login: {errors}");
+        }
+
+        var newToken = GenerateJwtToken(newUser);
+        var frontendRedirectUrl = !string.IsNullOrEmpty(returnUrl) ? returnUrl : "http://localhost:4200";
+        return Redirect($"{frontendRedirectUrl}#token={newToken}");
+    }
 
     [HttpPost("logout")]
     public async Task<IActionResult> Logout()
@@ -152,4 +180,3 @@ public class AuthController : ControllerBase
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 }
-

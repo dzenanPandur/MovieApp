@@ -230,24 +230,34 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private isRatingQuery(query: string): boolean {
-    return /(\d+)\s*stars?|at\s*least\s*(\d+)\s*stars?/.test(query);
+    return /(\d+)\s*stars?|at\s*least\s*(\d+)\s*stars?|below\s*(\d+)\s*stars?|less than\s*(\d+)\s*stars?/.test(query);
   }
 
   private matchesRatingQuery(movie: Movie, query: string): boolean {
     const avgRating = this.getAverageRating(movie);
-    
 
-    const exactMatch = query.match(/(\d+)\s*stars?/);
-    if (exactMatch && !query.includes('at least')) {
-      const targetRating = parseInt(exactMatch[1]);
-      return Math.round(avgRating) === targetRating;
+    const exactMatch = query.match(/^(\d+)\s*stars?$/);
+    if (exactMatch) {
+      const targetRating = parseInt(exactMatch[1], 10);
+      return Math.abs(avgRating - targetRating) < 0.25;
     }
-
 
     const minMatch = query.match(/at\s*least\s*(\d+)\s*stars?/);
     if (minMatch) {
-      const minRating = parseInt(minMatch[1]);
+      const minRating = parseInt(minMatch[1], 10);
       return avgRating >= minRating;
+    }
+
+    const belowMatch = query.match(/below\s*(\d+)\s*stars?/);
+    if (belowMatch) {
+      const belowRating = parseInt(belowMatch[1], 10);
+      return avgRating < belowRating;
+    }
+
+    const lessThanMatch = query.match(/less than\s*(\d+)\s*stars?/);
+    if (lessThanMatch) {
+      const lessThanRating = parseInt(lessThanMatch[1], 10);
+      return avgRating < lessThanRating;
     }
 
     return false;

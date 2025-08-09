@@ -1,5 +1,6 @@
-import networkService from "./networkService";
+import networkService from "./NetworkService";
 import { BehaviorSubject } from 'rxjs';
+import { environment } from "../../environments/environment";
 
 export interface LoginCredentials {
   username: string;
@@ -94,20 +95,23 @@ class AuthService {
   }
 
 
-  loginWithGoogle(): void {
-    if (!this.isBrowser()) return;
-    
-    const returnUrl = encodeURIComponent(window.location.origin + '/auth-callback');
-    window.location.href = `https://localhost:7237/api/Auth/login-google?returnUrl=${returnUrl}`;
-  }
+loginWithGoogle(): void {
+  if (!this.isBrowser()) return;
+
+  const returnUrl = encodeURIComponent(window.location.origin + '/auth-callback');
+  // backend URL + API + controller + action
+  window.location.href = `https://movieapp-fzdagzaffte2asfm.francecentral-01.azurewebsites.net/api/Auth/login-google?returnUrl=${returnUrl}`;
+}
+
+loginWithGitHub(): void {
+  if (!this.isBrowser()) return;
+
+  const returnUrl = encodeURIComponent(window.location.origin + '/auth-callback');
+  // backend URL + API + controller + action
+  window.location.href = `https://movieapp-fzdagzaffte2asfm.francecentral-01.azurewebsites.net/api/Auth/login-github?returnUrl=${returnUrl}`;
+}
 
 
-  loginWithGitHub(): void {
-    if (!this.isBrowser()) return;
-    
-    const returnUrl = encodeURIComponent(window.location.origin + '/auth-callback');
-    window.location.href = `https://localhost:7237/api/Auth/login-github?returnUrl=${returnUrl}`;
-  }
 
 
   handleOAuthCallback(token: string): void {

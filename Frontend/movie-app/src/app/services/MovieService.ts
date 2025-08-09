@@ -1,6 +1,6 @@
 import { HttpStatusCode } from "axios";
 import IMovie from "../models/IMovie";
-import networkService from "./networkService";
+import networkService from "./NetworkService";
 
 class MovieService {
 

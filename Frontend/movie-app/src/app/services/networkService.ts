@@ -1,15 +1,14 @@
 import axios from "axios";
 import IErrorResponse from "../models/IErrorResponse";
 import INetworkResponse from "../models/INetworkResponse";
+import { environment } from "../../environments/environment";
 
 class NetworkService {
 
     private api: any;
 
     constructor() {
-
-        
-        const baseUrl = "https://localhost:7237/api";
+        const baseUrl = environment.apiBaseUrl;
         this.api = axios.create({
             baseURL: baseUrl,
             timeout: 30_000

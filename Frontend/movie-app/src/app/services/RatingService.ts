@@ -1,5 +1,5 @@
 import { HttpStatusCode } from "axios";
-import networkService from "./networkService";
+import networkService from "./NetworkService";
 
 class RatingService {
     private readonly STORAGE_KEY = 'rated_movies_session';

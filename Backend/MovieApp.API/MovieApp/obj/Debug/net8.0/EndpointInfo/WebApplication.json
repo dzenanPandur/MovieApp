@@ -109,7 +109,28 @@
         }
       }
     },
-    "/api/Auth/external-login-callback": {
+    "/signin-google": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "parameters": [
+          {
+            "name": "returnUrl",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/signin-github": {
       "get": {
         "tags": [
           "Auth"
