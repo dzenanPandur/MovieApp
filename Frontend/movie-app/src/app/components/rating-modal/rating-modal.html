@@ -1,0 +1,58 @@
+<div class="modal-overlay" *ngIf="isOpen" (click)="onBackdropClick($event)">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Rate "{{ movieTitle }}"</h3>
+      <button 
+        class="close-btn" 
+        (click)="onCancel()"
+        [disabled]="isLoading"
+      >&times;</button>
+    </div>
+    
+    <div class="modal-body">
+      <p class="warning-text">
+        <strong>Warning:</strong> Your rating cannot be changed once submitted.
+      </p>
+      
+      <div class="rating-selection">
+        <p>Select your rating:</p>
+        <app-star-rating
+          [rating]="currentRating"
+          [readonly]="isLoading"
+          [showValue]="false"
+          (ratingChange)="onRatingChange($event)"
+        ></app-star-rating>
+        <p class="selected-rating" *ngIf="currentRating > 0">
+          You selected: {{ currentRating }} star{{ currentRating !== 1 ? 's' : '' }}
+        </p>
+        <p class="no-selection" *ngIf="currentRating === 0 && !isLoading">
+          Please select a rating
+        </p>
+        <p class="loading-message" *ngIf="isLoading">
+          Submitting your rating...
+        </p>
+      </div>
+    </div>
+    
+    <div class="modal-footer">
+      <button 
+        class="btn btn-cancel" 
+        (click)="onCancel()"
+        [disabled]="isLoading"
+      >
+        Cancel
+      </button>
+      <button 
+        class="btn btn-confirm" 
+        [disabled]="currentRating === 0 || isLoading"
+        (click)="onConfirm()"
+      >
+        <span *ngIf="!isLoading">Submit Rating</span>
+        <span *ngIf="isLoading" class="loading-content">
+          <span class="spinner"></span>
+          Submitting...
+        </span>
+      </button>
+    </div>
+  </div>
+</div>

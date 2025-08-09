@@ -1,0 +1,40 @@
+<div class="modal-backdrop" *ngIf="isOpen" (click)="closeModal.emit()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="closeModal.emit()">×</button>
+
+    <div *ngIf="isLoading" class="loading">
+      <div class="spinner" role="status" aria-label="Loading movie"></div>
+      <p class="loading-text">Loading movie details...</p>
+    </div>
+
+    <div *ngIf="!isLoading && errorMessage" class="error-box">
+      <div class="error-icon">🔒</div>
+      <p class="error-text">{{ errorMessage }}</p>
+      <button
+        *ngIf="errorMessage.includes('logged in')"
+        class="login-action-btn"
+        (click)="onLoginClick()"
+      >
+        Login
+      </button>
+    </div>
+
+    <div *ngIf="!isLoading && !errorMessage && movie" class="movie-info">
+
+      <div class="movie-cover" *ngIf="movie.coverImage">
+        <img [src]="movie.coverImage" [alt]="movie.title + ' cover'" class="cover-img" />
+      </div>
+
+      <h2>{{ movie.title }}</h2>
+      <p *ngIf="movie.shortDescription">{{ movie.shortDescription }}</p>
+      <p *ngIf="movie.releaseDate"><strong>Release Date:</strong> {{ movie.releaseDate | date }}</p>
+      <div *ngIf="movie.cast?.length">
+        <strong>Cast:</strong> {{ movie.cast.join(', ') }}
+      </div>
+    </div>
+
+    <div *ngIf="!isLoading && !errorMessage && !movie" class="no-content">
+      <p>No movie data available</p>
+    </div>
+  </div>
+</div>

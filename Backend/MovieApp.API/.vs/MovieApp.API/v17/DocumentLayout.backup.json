@@ -1,0 +1,87 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Dzeno\\Desktop\\Movie-Rating-App\\Backend\\MovieApp.API\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{61B67209-980D-48C6-990E-6AAA8230E2B3}|MovieApp\\WebApplication.csproj|c:\\users\\dzeno\\desktop\\movie-rating-app\\backend\\movieapp.api\\movieapp\\controllers\\moviecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61B67209-980D-48C6-990E-6AAA8230E2B3}|MovieApp\\WebApplication.csproj|solutionrelative:movieapp\\controllers\\moviecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61B67209-980D-48C6-990E-6AAA8230E2B3}|MovieApp\\WebApplication.csproj|c:\\users\\dzeno\\desktop\\movie-rating-app\\backend\\movieapp.api\\movieapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61B67209-980D-48C6-990E-6AAA8230E2B3}|MovieApp\\WebApplication.csproj|solutionrelative:movieapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61B67209-980D-48C6-990E-6AAA8230E2B3}|MovieApp\\WebApplication.csproj|c:\\users\\dzeno\\desktop\\movie-rating-app\\backend\\movieapp.api\\movieapp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{61B67209-980D-48C6-990E-6AAA8230E2B3}|MovieApp\\WebApplication.csproj|solutionrelative:movieapp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Dzeno\\AppData\\Roaming\\Microsoft\\UserSecrets\\9d86e957-319e-4aff-bef6-dd4d21acc595\\secrets.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MovieController.cs",
+              "DocumentMoniker": "C:\\Users\\Dzeno\\Desktop\\Movie-Rating-App\\Backend\\MovieApp.API\\MovieApp\\Controllers\\MovieController.cs",
+              "RelativeDocumentMoniker": "MovieApp\\Controllers\\MovieController.cs",
+              "ToolTip": "C:\\Users\\Dzeno\\Desktop\\Movie-Rating-App\\Backend\\MovieApp.API\\MovieApp\\Controllers\\MovieController.cs",
+              "RelativeToolTip": "MovieApp\\Controllers\\MovieController.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwCMAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-09T15:15:40Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Dzeno\\Desktop\\Movie-Rating-App\\Backend\\MovieApp.API\\MovieApp\\Program.cs",
+              "RelativeDocumentMoniker": "MovieApp\\Program.cs",
+              "ToolTip": "C:\\Users\\Dzeno\\Desktop\\Movie-Rating-App\\Backend\\MovieApp.API\\MovieApp\\Program.cs",
+              "RelativeToolTip": "MovieApp\\Program.cs",
+              "ViewState": "AgIAAHgAAAAAAAAAAAAAAJEAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-09T15:10:37.145Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Dzeno\\Desktop\\Movie-Rating-App\\Backend\\MovieApp.API\\MovieApp\\appsettings.json",
+              "RelativeDocumentMoniker": "MovieApp\\appsettings.json",
+              "ToolTip": "C:\\Users\\Dzeno\\Desktop\\Movie-Rating-App\\Backend\\MovieApp.API\\MovieApp\\appsettings.json",
+              "RelativeToolTip": "MovieApp\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-09T15:04:19.961Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "secrets.json",
+              "DocumentMoniker": "C:\\Users\\Dzeno\\AppData\\Roaming\\Microsoft\\UserSecrets\\9d86e957-319e-4aff-bef6-dd4d21acc595\\secrets.json",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\AppData\\Roaming\\Microsoft\\UserSecrets\\9d86e957-319e-4aff-bef6-dd4d21acc595\\secrets.json",
+              "ToolTip": "C:\\Users\\Dzeno\\AppData\\Roaming\\Microsoft\\UserSecrets\\9d86e957-319e-4aff-bef6-dd4d21acc595\\secrets.json",
+              "RelativeToolTip": "..\\..\\..\\..\\AppData\\Roaming\\Microsoft\\UserSecrets\\9d86e957-319e-4aff-bef6-dd4d21acc595\\secrets.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-09T15:04:08.153Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+<div class="search-container">
+  <input
+    type="text"
+    class="search-input"
+    placeholder="Search movies, actors, or try '5 stars', 'after 2015'..."
+    [(ngModel)]="searchQuery"
+    (input)="onSearchChange()"
+  >
+  <span class="search-icon">🔍</span>
+</div>

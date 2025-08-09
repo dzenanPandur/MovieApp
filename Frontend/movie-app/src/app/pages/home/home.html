@@ -1,0 +1,121 @@
+<div class="container">
+  <div class="header">
+    <div class="header-content">
+      <div class="title-section">
+        <h1>Movie App</h1>
+        <p>Discover and rate your favorite movies and TV shows</p>
+      </div>
+
+      <div class="auth-section">
+        <div *ngIf="isAuthenticated && currentUser" class="user-info">
+          <span class="welcome-text">Welcome, {{ currentUser.userName }}!</span>
+          <button class="logout-btn" (click)="onLogout()">
+            <svg class="logout-icon" viewBox="0 0 24 24" fill="none">
+              <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4m7 14l5-5-5-5m5 5H9"/>
+            </svg>
+            Sign Out
+          </button>
+        </div>
+
+        <button *ngIf="!isAuthenticated" class="login-btn" (click)="openLoginModal()">
+          <svg class="login-icon" viewBox="0 0 24 24" fill="none">
+            <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4m-5-4l5-5-5-5m5 5H3"/>
+          </svg>
+          Sign In
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="error-container" *ngIf="hasError">
+    <h3>Failed to load movies</h3>
+    <p>Something went wrong. Please try again.</p>
+    <button class="retry-btn" (click)="retry()">Retry</button>
+  </div>
+
+  <div class="search-section">
+    <app-search-bar (searchChange)="onSearchChange($event)"></app-search-bar>
+    
+    <div class="tabs">
+      <button 
+        class="tab-button"
+        [class.active]="activeTab === 'movies'"
+        (click)="setActiveTab('movies')"
+      >
+        Top 10 Movies
+      </button>
+      <button 
+        class="tab-button"
+        [class.active]="activeTab === 'tvshows'"
+        (click)="setActiveTab('tvshows')"
+      >
+        Top 10 TV Shows
+      </button>
+    </div>
+  </div>
+
+
+  <div class="loading-shell" *ngIf="status === 'loading'" aria-busy="true" aria-live="polite">
+    <div class="loading-box">
+      <div class="big-spinner" role="status" aria-label="Loading movies"></div>
+      <p class="loading-msg">Loading movies...</p>
+    </div>
+  </div>
+
+  <div *ngIf="status === 'success'">
+
+    <div class="movies-grid" *ngIf="displayedItems.length > 0">
+      <app-movie-card
+        *ngFor="let item of displayedItems"
+        [movie]="item"
+        (ratingChanged)="onMovieRatingChanged($event)"
+        (openDetails)="openMovieModal($event)"
+      ></app-movie-card>
+    </div>
+
+
+    <div class="load-more-section" *ngIf="hasMoreItems()">
+      <button class="load-more-btn" (click)="loadMore()">
+        Load More
+      </button>
+    </div>
+
+
+    <div class="all-loaded-section" *ngIf="isAllItemsLoaded">
+      <p class="all-loaded-message">That's all the {{ activeTab === 'movies' ? 'movies' : 'TV shows' }} available!</p>
+    </div>
+  </div>
+
+  <div class="no-results" *ngIf="status === 'success' && displayedItems.length === 0">
+    <p>No {{ activeTab === 'movies' ? 'movies' : 'TV shows' }} found.</p>
+  </div>
+</div>
+
+<app-movie-modal
+  [movieId]="selectedMovieId"
+  [isOpen]="showMovieModal"
+  (closeModal)="closeMovieModal()"
+  (openLogin)="onMovieModalOpenLogin()"
+></app-movie-modal>
+
+
+<app-rating-modal
+  [isOpen]="showRatingModal"
+  [movieTitle]="selectedMovieForRating?.title || ''"
+  [selectedRating]="selectedRating"
+  [isLoading]="isSubmittingRating"
+  (confirm)="onConfirmRating($event)"
+  (cancel)="onCancelRating()"
+></app-rating-modal>
+
+
+<app-login-modal
+  [isOpen]="showLoginModal"
+  (close)="closeLoginModal()"
+  (login)="onLogin($event)"
+  (googleLogin)="onGoogleLogin()"
+  (githubLogin)="onGithubLogin()"
+></app-login-modal>

@@ -1,0 +1,37 @@
+<div class="movie-card" (click)="onCardClick()">
+  <div class="movie-image">
+    
+    <img 
+      [src]="imageUrl" 
+      [alt]="movie.title"
+      class="cover-image"
+    />
+    
+    <div class="media-type-badge">{{ getMediaTypeText(movie.type) }}</div>
+  </div>
+  
+  <div class="movie-content">
+    <h3 class="movie-title">{{ movie.title }}</h3>
+    <p class="movie-description">{{ movie.shortDescription }}</p>
+    <p class="release-date">{{ movie.releaseDate | date:'MMM yyyy' }}</p>
+
+    <div class="cast-section" *ngIf="movie.cast && movie.cast.length > 0">
+      <span class="cast-label">Cast:</span>
+      <span class="cast-names">{{ getCastDisplay() }}</span>
+    </div>
+
+    <div class="rating-section" (click)="$event.stopPropagation()">
+      <app-star-rating
+        [rating]="getAverageRating()"
+        [readonly]="isAlreadyRated"
+        [showValue]="true"
+        [reviewCount]="getReviewCount()"
+        (ratingChange)="onRatingChange($event)"
+      ></app-star-rating>
+    </div>
+
+    <div class="already-rated" *ngIf="isAlreadyRated">
+      ✓ You've already rated this {{ getMediaTypeText(movie.type).toLowerCase() }}
+    </div>
+  </div>
+</div>
