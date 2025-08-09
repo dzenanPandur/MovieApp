@@ -41,8 +41,7 @@
               "RelativeToolTip": "MovieApp\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-08-09T18:20:11.28Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-09T18:20:11.28Z"
             },
             {
               "$type": "Document",
@@ -54,8 +53,7 @@
               "RelativeToolTip": "MovieApp\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAJUAAAAAAAAAAAAwwLYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-09T18:17:25.089Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-09T18:17:25.089Z"
             },
             {
               "$type": "Document",
@@ -67,8 +65,7 @@
               "RelativeToolTip": "MovieApp\\Controllers\\MovieController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-09T15:15:40Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-09T15:15:40Z"
             },
             {
               "$type": "Document",
@@ -93,8 +90,7 @@
               "RelativeToolTip": "..\\..\\..\\..\\AppData\\Roaming\\Microsoft\\UserSecrets\\9d86e957-319e-4aff-bef6-dd4d21acc595\\secrets.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-08-09T15:04:08.153Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-09T15:04:08.153Z"
             }
           ]
         }
